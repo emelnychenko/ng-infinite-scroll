@@ -1,1 +1,35 @@
-angular.module("igScroll",[]).directive("igScroll",["$window",function(l){return{restrict:"A",link:function(o,t,e){var i,r=!1,n=o.$eval(e.igScroll),c=function(){i=parseInt(l.getComputedStyle(t[0],null).getPropertyValue("height").replace(/px/,""))-l.innerHeight-(e.igScrollDist?e.igScrollDist:50)};(e.igScrollRoot?document.querySelector(e.igScrollRoot):l).onscroll=function(){i||c(),i<(this.pageYOffset||this.scrollTop)&&(r||(r=!0,n?n(function(){r=!1,c()}):null))}}}}]);
+angular.module('igScroll', [])
+    .directive('igScroll', ['$window', function($window) {
+        return {
+            restrict: 'A',
+            link: function($scope, $element, $attr) {
+                var $height, $locker = false, $event  = $scope.$eval($attr.igScroll);
+
+                var co = function() {
+                    $height = parseInt(
+                        $window.getComputedStyle(
+                            $element[0], null
+                        ).getPropertyValue("height").replace(/px/, '')
+                    ) - $window.innerHeight - (
+                        $attr.igScrollDist ? $attr.igScrollDist : 50
+                    );
+                };
+
+                (
+                    $attr.igScrollRoot ? document.querySelector($attr.igScrollRoot) : $window
+                ).onscroll = function() {
+                    if (!$height) co();
+
+                    if ($height < (this.pageYOffset || this.scrollTop)) {
+                        if (!$locker) {
+                            $locker = true;
+
+                            $event ? $event(function() {
+                                $locker = false; co();
+                            }) : null;
+                        }
+                    }
+                };
+            }
+        };
+    }]);
