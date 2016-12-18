@@ -1,9 +1,9 @@
-angular.module('igScroll', [])
-    .directive('igScroll', ['$window', function($window) {
+angular.module('tp.infinite.scroll', [])
+    .directive('tpScroll', ['$window', function($window) {
         return {
             restrict: 'A',
             link: function($scope, $element, $attr) {
-                var $height, $locker = false, $event  = $scope.$eval($attr.igScroll);
+                var $height, $locker = false, $event  = $scope.$eval($attr.tpScroll);
 
                 var co = function() {
                     $height = parseInt(
@@ -11,12 +11,12 @@ angular.module('igScroll', [])
                             $element[0], null
                         ).getPropertyValue("height").replace(/px/, '')
                     ) - $window.innerHeight - (
-                        $attr.igScrollDist ? $attr.igScrollDist : 50
+                        $attr.tpScrollDist ? $attr.tpScrollDist : 50
                     );
                 };
 
                 (
-                    $attr.igScrollRoot ? document.querySelector($attr.igScrollRoot) : $window
+                    $attr.tpScrollRoot ? document.querySelector($attr.tpScrollRoot) : $window
                 ).onscroll = function() {
                     if (!$height) co();
 
