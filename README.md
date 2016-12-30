@@ -6,9 +6,22 @@ Angular lazy load handler, simple infinite scroll
 ### Directive:
 
 ```
-ig-scroll="handle"                      - (required) use "$scope.handle" instance on scroll.
-ig-scroll-root="#dialog-scroll-canvas"  - use element with selector "#dialog-scroll-canvas" for calculate height. If this value null than handler use "window" height.
-ig-scroll-dist="200"                    - create addition step for handler ($height - 200);
+fx-scroll="handle"                      - (required) use "$scope.handle" instance on scroll.
+fx-scroll-root="#dialog-scroll-canvas"  - use element with selector "#dialog-scroll-canvas" for calculate height. If this value null than handler use "window" height.
+fx-scroll-dist="200"                    - create addition step for handler ($height - 200);
+```
+
+```
+<div 
+    fx-scroll="feed" 
+    fx-scroll-group="timeline" 
+    fx-scroll-fn="handler" 
+    [fx-scroll-root="#container"] 
+    [fx-scroll-dist="200"] 
+    [fx-scroll-reverse]
+>
+    # html
+</div>
 ```
 
 ### Usage:
