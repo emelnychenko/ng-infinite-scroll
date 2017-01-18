@@ -24,11 +24,11 @@ angular.module('fx.infinite.scroll', [])
                 if ($scroll.chain[name])
                     $scroll.chain[name] = false;
 
-                $scroll.calculate();
+                $scroll.offset = undefined;
             },
             "switch"     : function(group) {
                 $scroll.group.current = group;
-                $scroll.calculate();
+                $scroll.offset = undefined;
             },
         };
 
